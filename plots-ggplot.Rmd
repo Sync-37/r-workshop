@@ -7,9 +7,47 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+# Setting up tools we need
+library(tidyverse)
+library(readxl)
+library(here)
 ```
-
+# Got to
+### https://rstudio-conf-2020.github.io/r-for-excel/ggplot2.html
+# Part 5.5
 
 # Plots with ggplot2
 
 We are going to make plots in R and it's going to be amazing.
+
+```{r datainput}
+# Reading data in
+ca_np <- read_csv(here("data", "ca_np.csv"))
+ci_np <- read_excel(here("data", "ci_np.xlsx"))
+```
+
+```{r firstplot}
+# Basic plot of CI data
+gg_base <- ggplot(data = ci_np, aes(x = year, y = visitors)) 
+gg_base + geom_point() +
+  geom_line(
+    color = "purple",
+    linetype = "dashed"
+  )
+```
+
+Some common arguments we’ll use first are:
+
+    color = or colour =: update point or line colors
+    fill =: update fill color for objects with areas
+    linetype =: update the line type (dashed, long dash, etc.)
+    pch =: update the point style
+    size =: update the element size (e.g. of points or line thickness)
+    alpha =: update element opacity (1 = opaque, 0 = transparent)
+
+Building on our first line graph, let’s update the line color to “purple” and make the line type “dashed”:
+
+
+# Got to
+### https://rstudio-conf-2020.github.io/r-for-excel/ggplot2.html
+# Part 5.5
