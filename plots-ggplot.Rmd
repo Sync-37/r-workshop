@@ -14,7 +14,7 @@ library(here)
 ```
 # Got to
 ### https://rstudio-conf-2020.github.io/r-for-excel/ggplot2.html
-# Part 5.5
+# Part 5.7
 
 # Plots with ggplot2
 
@@ -30,10 +30,17 @@ ci_np <- read_excel(here("data", "ci_np.xlsx"))
 # Basic plot of CI data
 gg_base <- ggplot(data = ci_np, aes(x = year, y = visitors)) 
 gg_base + geom_point() +
-  geom_line(
-    color = "purple",
-    linetype = "dashed"
-  )
+geom_point(color = "purple",
+             pch = 25,
+             size = 3,
+             alpha = 0.5)
+#  To use variables for parameters...
+#  geom_point(
+#    aes(size = visitors,
+#        color = visitors),
+#    alpha = 0.5
+#  )
+
 ```
 
 Some common arguments we’ll use first are:
@@ -50,4 +57,4 @@ Building on our first line graph, let’s update the line color to “purple” 
 
 # Got to
 ### https://rstudio-conf-2020.github.io/r-for-excel/ggplot2.html
-# Part 5.5
+# Part 5.7
