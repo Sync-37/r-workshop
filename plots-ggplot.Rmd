@@ -30,16 +30,17 @@ ci_np <- read_excel(here("data", "ci_np.xlsx"))
 # Basic plot of CI data
 gg_base <- ggplot(data = ci_np, aes(x = year, y = visitors)) 
 gg_base + geom_point() +
-geom_point(color = "purple",
-             pch = 25,
-             size = 3,
-             alpha = 0.5)
+#geom_point(color = "purple",
+#             pch = 25,
+#             size = 3,
+#             alpha = 0.5)
 #  To use variables for parameters...
 #  geom_point(
 #    aes(size = visitors,
 #        color = visitors),
 #    alpha = 0.5
-#  )
+#  ) +
+ theme_bw()
 
 ```
 
@@ -53,6 +54,34 @@ Some common arguments we’ll use first are:
     alpha =: update element opacity (1 = opaque, 0 = transparent)
 
 Building on our first line graph, let’s update the line color to “purple” and make the line type “dashed”:
+
+```{r secondplot}
+
+gg_base +
+  geom_line(linetype = "dotted") +
+  theme_bw() +
+  labs(
+    x = "Year",
+    y = "Annual park visitors",
+    title = "Channel Islands NP Visitation",
+    subtitle = "(1963 - 2016)"
+  )
+
+```
+Note: If you want to update the formatting of axis values (for example, to convert to comma format instead of scientific format above), you can use the scales package options (see more from the R Cookbook).
+```{r thirdplot}
+ggplot(data = ca_np, aes(x = year, y = visitors,color = park_name))+ geom_line()
+ 
+```
+```{r five}
+gg_np <- ggplot(data = ca_np, aes(x = year, y = visitors, group = park_name))
+gg_np +
+  geom_line(show.legend = FALSE) +
+  theme_light() + 
+  labs(x = "year", y = "annual visitors") +
+  facet_wrap(~ park_name)
+ggsave(here("figures", "np_graph.jpg"), dpi = 180, width = 8, height = 7)
+```
 
 
 # Got to
